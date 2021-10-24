@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blue_bird" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
