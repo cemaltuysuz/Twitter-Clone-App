@@ -9,11 +9,69 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.starter.WelcomeFragment">
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcomeText"
+        android:layout_width="@dimen/welcome_text_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/starter_activity_margin"
+        android:layout_marginTop="@dimen/welcome_text_margin_top"
+        android:text="@string/welcomeText"
+        android:textSize="@dimen/welcome_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/welcomeMiddleContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/welcome_middle_container_height"
+        android:layout_margin="@dimen/starter_activity_margin"
+        app:layout_constraintBottom_toTopOf="@+id/logInRouter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_with_google_light"
+            android:text="@string/SignInWithGoogle"/>
+
+        <include
+            layout="@layout/divider_with_text"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/register_button"
+            android:textColor="@color/white"
+            android:text="@string/Register"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/logInRouter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/starter_activity_margin"
+        android:layout_marginBottom="20dp"
+        android:text="@string/LogIn"
+        android:textSize="@dimen/log_in_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

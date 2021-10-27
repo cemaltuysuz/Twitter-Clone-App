@@ -9,4 +9,5 @@
     <string name="Register">Create Account</string>
     <string name="LogIn">Have An Account Already? Log in</string>
     <string name="WelcomePrivacy">By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.</string>
+    <string name="welcomeDivider">Or</string>
 </resources>

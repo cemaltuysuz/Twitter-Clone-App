@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Splash Activity -->
-    <dimen name="icon_width">60dp</dimen>
-    <dimen name="icon_height">60dp</dimen>
+    <dimen name="splash_icon_width">60dp</dimen>
+    <dimen name="splash_icon_height">60dp</dimen>
+
+
+    <!-- Starter Activity -->
+    <dimen name="starter_activity_margin">15dp</dimen>
+
+    <dimen name="welcome_text_width">300dp</dimen>
+    <dimen name="welcome_text_margin_top">90dp</dimen>
+    <dimen name="welcome_text_size">35sp</dimen>
+
+    <dimen name="welcome_middle_container_height">300dp</dimen>
+
+    <dimen name="log_in_text_size">20sp</dimen>
+
+
+
 </resources>

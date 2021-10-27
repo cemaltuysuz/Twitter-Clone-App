@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by cemaltuysuz on 10/27/21 8:19 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 10/27/21 8:19 PM
+  ~  */
+  -->
+
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners
+        android:radius="12dp"/>
+    <solid
+        android:color="@color/blue_200"/>
+
+</shape>
