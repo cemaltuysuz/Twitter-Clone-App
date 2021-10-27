@@ -9,7 +9,7 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -37,15 +37,6 @@
                 app:srcCompat="@drawable/blue_bird"
                 android:tint="@color/white"
                 android:layout_centerInParent="true"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:tint="@color/white"
-                app:srcCompat="@drawable/home_stars"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="13dp"/>
 
         </RelativeLayout>
 

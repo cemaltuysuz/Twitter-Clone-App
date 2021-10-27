@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Twitter</string>
+
+    <!--     Starter Activity    -->
+
+    <!-- Welcome Fragment -->
+    <string name="welcomeText">See whats happening in the world right now.</string>
+    <string name="SignInWithGoogle">Continue with Google</string>
+    <string name="Register">Create Account</string>
+    <string name="LogIn">Have An Account Already? Log in</string>
+    <string name="WelcomePrivacy">By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.</string>
 </resources>
