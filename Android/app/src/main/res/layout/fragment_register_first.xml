@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /**
+  ~  * Created by cemaltuysuz on 10/28/21 10:35 PM
+  ~  * Copyright (c) 2021 . All rights reserved.
+  ~  * Last modified 10/28/21 10:35 PM
+  ~  */
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.starter.RegisterFirstFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/registerFirstPageTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/starter_activity_margin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/register_first_page_title"
+        android:textSize="@dimen/welcome_text_size"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:id="@+id/registerFirstInputContainer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:layout_below="@+id/registerFirstPageTitle">
+
+        <!-- User name -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/registerFirstNameEditText"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/register_first_input_name"
+            android:backgroundTint="@color/blue_200"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <!-- User name error -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/registerFirstNameErrorTextView"
+            android:layout_below="@+id/registerFirstNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem3"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"/>
+
+        <!-- User name char count -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/registerFirstNameCharCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registerFirstNameEditText"
+            android:layout_alignParentEnd="true"
+            android:text="@string/lorem2"/>
+
+        <!-- User Contact -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/registerFirstContactEditText"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/registerFirstNameErrorTextView"
+            android:hint="@string/register_first_input_contact"
+            android:backgroundTint="@color/blue_200"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/registerFirstContactEditText"
+            android:hint="@string/register_first_date_of_birth"
+            android:backgroundTint="@color/blue_200"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true">
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</RelativeLayout>

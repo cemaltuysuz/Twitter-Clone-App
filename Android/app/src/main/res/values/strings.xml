@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Twitter</string>
 
+    <!--     Lorem    -->
+    <string name="lorem2">Lorem impsun </string>
+    <string name="lorem3">Lorem impsun dolor</string>
+    <string name="lorem5">Lorem impsun dolor sit amet</string>
+
     <!--     Starter Activity    -->
 
     <!-- Welcome Fragment -->
@@ -10,4 +15,11 @@
     <string name="LogIn">Have An Account Already? Log in</string>
     <string name="WelcomePrivacy">By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.</string>
     <string name="welcomeDivider">Or</string>
+
+    <!-- Register First Fragment -->
+    <string name="register_first_page_title">Create your account</string>
+    <string name="register_first_input_name">Name</string>
+    <string name="register_first_input_contact">Phone number or email address</string>
+    <string name="register_first_date_of_birth">Date of birth</string>
+
 </resources>
