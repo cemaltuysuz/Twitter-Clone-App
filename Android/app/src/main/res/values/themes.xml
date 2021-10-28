@@ -21,4 +21,21 @@
 
     <style name="Theme.Twitter.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Input Error Text Style -->
+    <style name="InputErrorText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/lorem3</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Input Error Text Style -->
+    <style name="RegisterInputStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:backgroundTint">@color/blue_200</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
 </resources>

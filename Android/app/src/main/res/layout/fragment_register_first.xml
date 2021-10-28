@@ -37,19 +37,13 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:hint="@string/register_first_input_name"
-            android:backgroundTint="@color/blue_200"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            style="@style/RegisterInputStyle"/>
 
         <!-- User name error -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/registerFirstNameErrorTextView"
             android:layout_below="@+id/registerFirstNameEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lorem3"
-            android:textColor="@android:color/holo_red_dark"
-            android:textStyle="bold"/>
+            style="@style/InputErrorText"/>
 
         <!-- User name char count -->
         <androidx.appcompat.widget.AppCompatTextView
@@ -63,21 +57,24 @@
         <!-- User Contact -->
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/registerFirstContactEditText"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/between_register_inputs"
             android:layout_below="@+id/registerFirstNameErrorTextView"
             android:hint="@string/register_first_input_contact"
-            android:backgroundTint="@color/blue_200"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            style="@style/RegisterInputStyle"/>
 
+        <!-- User Contact Error -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/registerFirstContactErrorTextView"
+            android:layout_below="@+id/registerFirstContactEditText"
+            style="@style/InputErrorText"/>
+
+        <!-- User Date Of Birth -->
         <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginTop="20dp"
+            android:id="@+id/registerFirstDateOfBirth"
+            android:layout_marginTop="@dimen/between_register_inputs"
             android:layout_below="@+id/registerFirstContactEditText"
             android:hint="@string/register_first_date_of_birth"
-            android:backgroundTint="@color/blue_200"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-
+            style="@style/RegisterInputStyle"/>
 
     </RelativeLayout>
 

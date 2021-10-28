@@ -9,6 +9,7 @@
     <!-- Starter Activity -->
     <dimen name="starter_activity_margin">15dp</dimen>
 
+    <!-- Welcome Fragment -->
     <dimen name="welcome_text_width">300dp</dimen>
     <dimen name="welcome_text_margin_top">90dp</dimen>
     <dimen name="welcome_text_size">35sp</dimen>
@@ -17,6 +18,7 @@
 
     <dimen name="log_in_text_size">20sp</dimen>
 
-
+    <!-- Register -->
+    <dimen name="between_register_inputs">20dp</dimen>
 
 </resources>
