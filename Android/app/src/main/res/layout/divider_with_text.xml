@@ -18,9 +18,10 @@
         android:background="@drawable/welcome_divider">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="?attr/colorOnPrimary"
             android:text="@string/welcomeDivider"
             android:padding="5dp"/>
 
