@@ -79,14 +79,37 @@
     </RelativeLayout>
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:visibility="gone"
-        android:orientation="horizontal"
+    <RelativeLayout
+        android:padding="7dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/changeContactType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:textAllCaps="false"
+            android:background="@drawable/light_stroke_line"
+            android:text="@string/register_first_use_email"
+            android:padding="10dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/routeRegisterSecondFragment"
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textAllCaps="false"
+            android:background="@drawable/darker_gray_oval_button"
+            android:text="@string/next"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

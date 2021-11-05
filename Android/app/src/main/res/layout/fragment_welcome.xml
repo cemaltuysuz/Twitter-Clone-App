@@ -44,17 +44,18 @@
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/login_with_google_light"
+            android:background="@drawable/light_stroke_line"
             android:text="@string/SignInWithGoogle"/>
 
         <include
             layout="@layout/divider_with_text"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/routeCreateAccount"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/register_button"
+            android:background="@drawable/light_blue_jr_oval_button"
             android:textColor="@color/white"
             android:text="@string/Register"/>
 

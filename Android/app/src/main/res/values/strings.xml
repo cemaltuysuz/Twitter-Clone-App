@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Twitter</string>
 
+    <string name="next">Next</string>
+
     <!--     Lorem    -->
     <string name="lorem2">Lorem impsun </string>
     <string name="lorem3">Lorem impsun dolor</string>
@@ -21,5 +23,8 @@
     <string name="register_first_input_name">Name</string>
     <string name="register_first_input_contact">Phone number or email address</string>
     <string name="register_first_date_of_birth">Date of birth</string>
+    <string name="register_first_use_email">Use email instead</string>
+    <string name="register_first_use_phone">Use phone instead</string>
+
 
 </resources>

@@ -16,6 +16,17 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.cemaltuysuz.twitter.ui.fragment.starter.WelcomeFragment"
-        android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" />
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcomeFragment_to_registerFirstFragment2"
+            app:destination="@id/registerFirstFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFirstFragment2"
+        android:name="com.cemaltuysuz.twitter.ui.fragment.starter.RegisterFirstFragment"
+        tools:layout="@layout/fragment_register_first">
+        <action
+            android:id="@+id/action_registerFirstFragment2_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
 </navigation>
