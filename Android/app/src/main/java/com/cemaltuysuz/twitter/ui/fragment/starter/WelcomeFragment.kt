@@ -15,6 +15,11 @@ import androidx.navigation.Navigation
 import com.cemaltuysuz.twitter.R
 import com.cemaltuysuz.twitter.databinding.FragmentWelcomeBinding
 
+/***
+ * With this class created to welcome the user,
+ * the user can log in or register if they want.
+ */
+
 class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
     private var fragmentWelcomeBinding:FragmentWelcomeBinding? = null
@@ -30,9 +35,6 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFirstFragment2()
             Navigation.findNavController(it).navigate(action)
         }
-
-
-
     }
 
     override fun onDestroy() {

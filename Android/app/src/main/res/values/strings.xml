@@ -2,6 +2,7 @@
     <string name="app_name">Twitter</string>
 
     <string name="next">Next</string>
+    <string name="default_name_count">50</string>
 
     <!--     Lorem    -->
     <string name="lorem2">Lorem impsun </string>
