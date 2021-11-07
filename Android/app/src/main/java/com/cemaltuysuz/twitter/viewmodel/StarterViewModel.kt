@@ -8,32 +8,30 @@
 
 package com.cemaltuysuz.twitter.viewmodel
 
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cemaltuysuz.twitter.enum.ContactType
+import com.cemaltuysuz.twitter.enums.ContactType
 
 class StarterViewModel : ViewModel() {
 
-    val username = MutableLiveData<String>()
+    private val contactType = MutableLiveData<ContactType>().apply {
+        if (this.value == null) this.value = ContactType.MAIL
+    }
+    val getContactType : LiveData<ContactType>
+    get() = contactType
 
-    @get:Bindable
-    val usernameWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            TODO("Not yet implemented")
+    fun changeContactType (){
+        if (contactType.value != null){
+            contactType.value?.let {
+                when(it){
+                    ContactType.MAIL -> contactType.postValue(ContactType.NUM)
+                    ContactType.NUM -> contactType.postValue(ContactType.MAIL)
+                }
+            }
+        }else {
+            contactType.postValue(ContactType.MAIL)
         }
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-        }
-
-        override fun afterTextChanged(p0: Editable?) {
-            TODO("Not yet implemented")
-        }
-
     }
 
 

@@ -6,7 +6,7 @@
  *
  */
 
-package com.cemaltuysuz.twitter.enum
+package com.cemaltuysuz.twitter.enums
 
 enum class ContactType {
     MAIL,

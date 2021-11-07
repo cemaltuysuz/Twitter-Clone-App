@@ -12,42 +12,135 @@
  * */
 package com.cemaltuysuz.twitter.ui.fragment.starter
 
+import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.os.Bundle
-import android.util.Log
+import android.text.InputType
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.cemaltuysuz.twitter.R
 import com.cemaltuysuz.twitter.databinding.FragmentRegisterFirstBinding
+import com.cemaltuysuz.twitter.enums.ContactType
 import com.cemaltuysuz.twitter.viewmodel.StarterViewModel
+import android.app.Activity
+import android.content.Context
+import android.telephony.PhoneNumberUtils
+import android.util.Patterns
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.RelativeLayout
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.cemaltuysuz.twitter.utils.setEnable
+import com.loper7.date_time_picker.DateTimeConfig
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
 
+
+    var currentContactType:ContactType? = null
     private var fragmentRegisterFirstBinding:FragmentRegisterFirstBinding? = null
     private lateinit var viewModel : StarterViewModel
 
+    @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(StarterViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity())[StarterViewModel::class.java]
 
         fragmentRegisterFirstBinding = FragmentRegisterFirstBinding.bind(view)
         val binding = fragmentRegisterFirstBinding!!
 
-        binding.lifecycleOwner = this
-        binding.byViewModel = viewModel
-
+        setUpDatePicker()
         observer()
 
-        binding.registerFirstContactEditText.setOnFocusChangeListener { view, b ->
+        var nameInputJob:Job? = null
+        binding.registerFirstNameEditText.addTextChangedListener {
+            it?.let { text ->
+                binding.registerFirstNameCharCount.text = (50 - text.length).toString()
+                binding.routeRegisterSecondFragment.setEnable(false)
+                nameInputJob?.cancel()
+                nameInputJob = lifecycleScope.launch {
+                    delay(1000)
+                    if (text.isNotEmpty()) {
+                        binding.registerFirstNameEditText
+                            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
+                        binding.routeRegisterSecondFragment.setEnable(true)
+                    }else{
+                        binding.registerFirstNameEditText
+                            .setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                        binding.routeRegisterSecondFragment.setEnable(false)
+                    }
+                }
+            }
+        }
+
+        var contactInputJob:Job? = null
+        binding.registerFirstContactEditText.addTextChangedListener {
+            it?.let { text ->
+                currentContactType?.let { cnt ->
+                    contactInputJob?.cancel()
+                    binding.routeRegisterSecondFragment.setEnable(false)
+                    contactInputJob = lifecycleScope.launch {
+                        delay(1000)
+                        when(cnt){
+                            ContactType.MAIL -> {
+                                if (text.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(text).matches()){
+                                    binding.registerFirstContactEditText.
+                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
+                                    binding.routeRegisterSecondFragment.setEnable(true)
+                                }else{
+                                    binding.registerFirstContactEditText.
+                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                                    binding.routeRegisterSecondFragment.setEnable(false)
+                                }
+                            }
+                            ContactType.NUM -> {
+                                if (text.isNotEmpty() && PhoneNumberUtils.isGlobalPhoneNumber(text.toString())){
+                                    binding.registerFirstContactEditText.
+                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
+                                    binding.routeRegisterSecondFragment.setEnable(true)
+                                }else{
+                                    binding.registerFirstContactEditText.
+                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                                    binding.routeRegisterSecondFragment.setEnable(false)
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        var dateTimeJob:Job? = null
+        binding.dateTimePicker.setOnDateTimeChangedListener {
+            dateTimeJob?.cancel()
+            dateTimeJob = lifecycleScope.launch{
+                delay(1000)
+                val formatter  = SimpleDateFormat("dd-MMMM-yyyy")
+                val dateString = formatter.format( Date (it))
+                binding.registerFirstDateOfBirth.text = dateString
+            }
+        }
+
+        binding.registerFirstDateOfBirth.setOnFocusChangeListener { _, b ->
+            if (b){
+                binding.dateTimePicker.visibility = View.VISIBLE
+            }else{
+                binding.dateTimePicker.visibility = View.GONE
+                hideKeyboard(requireActivity())
+            }
+        }
+
+        binding.registerFirstContactEditText.setOnFocusChangeListener { _, b ->
             if (b){
                 binding.changeContactType.visibility = View.VISIBLE
             }else{
@@ -56,18 +149,63 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
         }
 
         binding.changeContactType.setOnClickListener {
-
+            if (!binding.registerFirstContactEditText.isFocused){
+                showKeyboard()
+            }
+            viewModel.changeContactType()
         }
+
+    }
+
+    private fun setUpDatePicker() {
+        fragmentRegisterFirstBinding!!.apply {
+            dateTimePicker.setDisplayType(intArrayOf(
+                DateTimeConfig.MONTH,
+                DateTimeConfig.DAY,
+                DateTimeConfig.YEAR))
+            dateTimePicker.showLabel(false)
+            dateTimePicker.setMaxMillisecond(System.currentTimeMillis())
+        }
+
     }
 
     private fun observer() {
-        viewModel.username.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+        viewModel.getContactType.observe(viewLifecycleOwner, Observer {
+            if (it == null) viewModel.changeContactType()
+            it?.let {
+                currentContactType = it
+                when(it){
+                    ContactType.MAIL -> {
+                        fragmentRegisterFirstBinding!!.apply {
+                            registerFirstContactEditText.inputType = InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS
+                            changeContactType.text = resources.getText(R.string.register_first_use_phone)
+                        }
+                    }
+                    ContactType.NUM -> {
+                        fragmentRegisterFirstBinding!!.apply {
+                            registerFirstContactEditText.inputType = InputType.TYPE_CLASS_NUMBER
+                            changeContactType.text = resources.getText(R.string.register_first_use_email)
+                        }
+                    }
+                }
+            }
         })
     }
 
     override fun onDestroy() {
         fragmentRegisterFirstBinding = null
         super.onDestroy()
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        if (activity.currentFocus == null) return
+        val inputMethodManager =
+            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(activity.currentFocus!!.windowToken, 0)
+    }
+
+    private fun showKeyboard () {
+        val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 }

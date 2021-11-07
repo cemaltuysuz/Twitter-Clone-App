@@ -6,123 +6,157 @@
   ~  * Last modified 10/28/21 10:35 PM
   ~  */
   -->
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.starter.RegisterFirstFragment">
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="ByViewModel"
-            type="com.cemaltuysuz.twitter.viewmodel.StarterViewModel" />
-
-    </data>
-
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.starter.RegisterFirstFragment">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/registerFirstPageTitle"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="@dimen/starter_activity_margin"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="@string/register_first_page_title"
-            android:textSize="@dimen/welcome_text_size"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:padding="15dp"
-            android:id="@+id/registerFirstInputContainer"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center"
-            android:layout_below="@+id/registerFirstPageTitle">
+            android:layout_height="match_parent">
 
-            <!-- User name -->
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/registerFirstNameEditText"
-                style="@style/RegisterInputStyle"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:hint="@string/register_first_input_name"
-                android:maxLength="50"
-                android:text="@{ByViewModel.username}" />
-
-            <!-- User name error -->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/registerFirstNameErrorTextView"
-                android:layout_below="@+id/registerFirstNameEditText"
-                style="@style/InputErrorText" />
-
-            <!-- User name char count -->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/registerFirstNameCharCount"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{ByViewModel.username}"
-                android:layout_below="@+id/registerFirstNameEditText"
-                android:layout_alignParentEnd="true"/>
+                android:orientation="vertical">
 
-            <!-- User Contact -->
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/registerFirstContactEditText"
-                android:layout_marginTop="@dimen/between_register_inputs"
-                android:layout_below="@+id/registerFirstNameErrorTextView"
-                android:hint="@string/register_first_input_contact"
-                style="@style/RegisterInputStyle" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/registerFirstPageTitle"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="@dimen/starter_activity_margin"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register_first_page_title"
+                    android:textSize="@dimen/welcome_text_size"
+                    android:textStyle="bold" />
 
-            <!-- User Contact Error -->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/registerFirstContactErrorTextView"
-                android:layout_below="@+id/registerFirstContactEditText"
-                style="@style/InputErrorText" />
+                <RelativeLayout
+                    android:padding="15dp"
+                    android:id="@+id/registerFirstInputContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:gravity="center"
+                    android:layout_below="@+id/registerFirstPageTitle">
 
-            <!-- User Date Of Birth -->
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/registerFirstDateOfBirth"
-                android:layout_marginTop="@dimen/between_register_inputs"
-                android:layout_below="@+id/registerFirstContactEditText"
-                android:hint="@string/register_first_date_of_birth"
-                style="@style/RegisterInputStyle" />
+                    <!-- User name -->
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/registerFirstNameEditText"
+                        style="@style/RegisterInputStyle"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:drawableTint="@android:color/holo_green_dark"
+                        android:hint="@string/register_first_input_name"
+                        android:maxLength="50" />
 
-        </RelativeLayout>
+                    <!-- User name error -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/registerFirstNameErrorTextView"
+                        android:layout_below="@+id/registerFirstNameEditText"
+                        style="@style/InputErrorText" />
+
+                    <!-- User name char count -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/registerFirstNameCharCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/registerFirstNameEditText"
+                        android:layout_alignParentEnd="true"/>
+
+                    <!-- User Contact -->
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/registerFirstContactEditText"
+                        style="@style/RegisterInputStyle"
+                        android:layout_below="@+id/registerFirstNameErrorTextView"
+                        android:layout_marginTop="@dimen/between_register_inputs"
+                        android:drawableTint="@android:color/holo_green_dark"
+                        android:hint="@string/register_first_input_contact" />
+
+                    <!-- User Contact Error -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/registerFirstContactErrorTextView"
+                        android:layout_below="@+id/registerFirstContactEditText"
+                        style="@style/InputErrorText" />
+
+                    <!-- User Date Of Birth -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/registerFirstDateOfBirth"
+                        style="@style/RegisterInputStyle"
+                        android:layout_below="@+id/registerFirstContactEditText"
+                        android:layout_marginTop="@dimen/between_register_inputs"
+                        android:hint="@string/register_first_date_of_birth" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        <RelativeLayout
+
+        </ScrollView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/firstRegisterBottomHelper"
             android:padding="7dp"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:orientation="vertical"
             android:background="?attr/colorOnPrimary">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
 
-            <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/changeContactType"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/light_stroke_line"
+                    android:padding="10dp"
+                    android:text="@string/register_first_use_email"
+                    android:textAllCaps="false" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/routeRegisterSecondFragment"
+                    android:layout_width="76dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/darker_gray_oval_button"
+                    android:backgroundTint="@color/black_500"
+                    android:enabled="false"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            <com.loper7.date_time_picker.DateTimePicker
                 android:visibility="gone"
-                android:id="@+id/changeContactType"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:textAllCaps="false"
-                android:background="@drawable/light_stroke_line"
-                android:text="@string/register_first_use_email"
-                android:padding="10dp" />
+                android:id="@+id/dateTimePicker"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout="@layout/layout_date_picker_segmentation"
+                app:showLabel="true"
+                app:textSize="16sp"
+                app:themeColor="@color/black_500" />
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/routeRegisterSecondFragment"
-                android:layout_width="76dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:textAllCaps="false"
-                android:background="@drawable/darker_gray_oval_button"
-                android:text="@string/next" />
-
-        </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </RelativeLayout>
-</layout>
