@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Twitter</string>
 
+    <!--     Validators    -->
+    <string name="text_validation_success">Validation is success !</string>
+
     <string name="next">Next</string>
     <string name="default_name_count">50</string>
 
