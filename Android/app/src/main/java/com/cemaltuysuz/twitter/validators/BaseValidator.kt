@@ -10,7 +10,15 @@ package com.cemaltuysuz.twitter.validators
 
 import com.cemaltuysuz.twitter.R
 
+/**
+ * Instead of repeatedly checking input rules within the main class,
+ * validator classes take on this task.
+ *
+ * Base validator class covers common fields and controls bulk validation.
+ * */
+
 abstract class BaseValidator : IValidator {
+    var input:String? = null
     companion object{
         fun validate(vararg validators: IValidator): ValidateResult {
             validators.forEach {
@@ -20,5 +28,9 @@ abstract class BaseValidator : IValidator {
             }
             return ValidateResult(true, R.string.text_validation_success)
         }
+    }
+
+    fun changeInput(inp:String){
+        this.input = inp
     }
 }

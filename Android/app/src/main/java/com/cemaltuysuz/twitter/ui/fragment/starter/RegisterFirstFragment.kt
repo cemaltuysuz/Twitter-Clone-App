@@ -35,6 +35,9 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.cemaltuysuz.twitter.utils.setEnable
+import com.cemaltuysuz.twitter.validators.BaseValidator
+import com.cemaltuysuz.twitter.validators.EmailValidator
+import com.cemaltuysuz.twitter.validators.EmptyValidator
 import com.loper7.date_time_picker.DateTimeConfig
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -45,18 +48,27 @@ import java.util.*
 class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
 
 
-    var currentContactType:ContactType? = null
+    private var currentContactType:ContactType? = null
     private var fragmentRegisterFirstBinding:FragmentRegisterFirstBinding? = null
     private lateinit var viewModel : StarterViewModel
+    // validators
+    private var emailValidator:EmailValidator? = null
+    private var emptyValidator:EmptyValidator? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // ViewModel
         viewModel = ViewModelProvider(requireActivity())[StarterViewModel::class.java]
 
+        // Binding
         fragmentRegisterFirstBinding = FragmentRegisterFirstBinding.bind(view)
         val binding = fragmentRegisterFirstBinding!!
+
+        // Validators
+        emailValidator = EmailValidator()
+        emptyValidator = EmptyValidator()
 
         setUpDatePicker()
         observer()
@@ -81,18 +93,32 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
                 }
             }
         }
-
+        /**
+         * I will do the necessary verifications 1 second
+         * after the user has entered the last character.
+         * */
         var contactInputJob:Job? = null
         binding.registerFirstContactEditText.addTextChangedListener {
             it?.let { text ->
                 currentContactType?.let { cnt ->
                     contactInputJob?.cancel()
+                    /**
+                     * When the user starts making changes to her information, the confirmation button is turned off.
+                     * */
                     binding.routeRegisterSecondFragment.setEnable(false)
                     contactInputJob = lifecycleScope.launch {
                         delay(1000)
                         when(cnt){
+                            /**
+                             * The user can provide e-mail address or telephone information for communication.
+                             * Which one is decided and necessary verification is done.
+                             *
+                             * To understand the logic of validation classes,
+                             * @see com.cemaltuysuz.twitter.validators.BaseValidator
+                             * */
                             ContactType.MAIL -> {
-                                if (text.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(text).matches()){
+                                emailValidator!!.changeInput(text.toString())
+                                if (emailValidator!!.validate().isSuccess){
                                     binding.registerFirstContactEditText.
                                     setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
                                     binding.routeRegisterSecondFragment.setEnable(true)

@@ -10,11 +10,11 @@ package com.cemaltuysuz.twitter.validators
 
 import com.cemaltuysuz.twitter.R
 
-class EmptyValidator(private val input:String)
+class EmptyValidator()
     : BaseValidator() {
 
     override fun validate(): ValidateResult {
-        val isValid = input.isNotEmpty()
+        val isValid = input!!.isNotEmpty()
         return ValidateResult(
             isValid,
             if (isValid){

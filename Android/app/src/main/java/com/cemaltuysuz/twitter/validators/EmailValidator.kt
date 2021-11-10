@@ -10,10 +10,11 @@ package com.cemaltuysuz.twitter.validators
 
 import com.cemaltuysuz.twitter.R
 
-class EmailValidator(private val input:String)
+class EmailValidator()
     :BaseValidator(){
+
     override fun validate(): ValidateResult {
-        val isValid = android.util.Patterns.EMAIL_ADDRESS.matcher(input).matches()
+        val isValid = android.util.Patterns.EMAIL_ADDRESS.matcher(input!!).matches()
         return ValidateResult(
             isValid,
             if(isValid){
