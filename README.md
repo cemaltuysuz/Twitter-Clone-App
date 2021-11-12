@@ -1,2 +1,2 @@
-# Twitter-Clone-Kotlin
-Twitter Clone with Kotlin &amp;&amp; Firebase
+# Twitter-Clone
+Twitter Clone
