@@ -6,7 +6,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StarterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

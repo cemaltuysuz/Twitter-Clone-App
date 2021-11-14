@@ -5,6 +5,7 @@
     <string name="text_validation_success">Validation is success !</string>
     <string name="text_validation_error_empty_field">This field cannot be left blank !</string>
     <string name="text_validation_error_email_field">Please enter a valid email address !</string>
+    <string name="text_validation_error_phone_field">Please enter a valid phone number !</string>
 
     <string name="next">Next</string>
     <string name="default_name_count">50</string>

@@ -13,7 +13,6 @@
 package com.cemaltuysuz.twitter.ui.fragment.starter
 
 import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -28,16 +27,11 @@ import com.cemaltuysuz.twitter.viewmodel.StarterViewModel
 import android.app.Activity
 import android.content.Context
 import android.telephony.PhoneNumberUtils
-import android.util.Patterns
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.cemaltuysuz.twitter.utils.setEnable
-import com.cemaltuysuz.twitter.validators.BaseValidator
-import com.cemaltuysuz.twitter.validators.EmailValidator
-import com.cemaltuysuz.twitter.validators.EmptyValidator
+import com.cemaltuysuz.twitter.validators.*
 import com.loper7.date_time_picker.DateTimeConfig
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -48,12 +42,9 @@ import java.util.*
 class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
 
 
-    private var currentContactType:ContactType? = null
+    private var currentContactType:ContactType = ContactType.MAIL
     private var fragmentRegisterFirstBinding:FragmentRegisterFirstBinding? = null
     private lateinit var viewModel : StarterViewModel
-    // validators
-    private var emailValidator:EmailValidator? = null
-    private var emptyValidator:EmptyValidator? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,10 +56,6 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
         // Binding
         fragmentRegisterFirstBinding = FragmentRegisterFirstBinding.bind(view)
         val binding = fragmentRegisterFirstBinding!!
-
-        // Validators
-        emailValidator = EmailValidator()
-        emptyValidator = EmptyValidator()
 
         setUpDatePicker()
         observer()
@@ -100,6 +87,7 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
         var contactInputJob:Job? = null
         binding.registerFirstContactEditText.addTextChangedListener {
             it?.let { text ->
+                val inp = text.toString()
                 currentContactType?.let { cnt ->
                     contactInputJob?.cancel()
                     /**
@@ -117,31 +105,76 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
                              * @see com.cemaltuysuz.twitter.validators.BaseValidator
                              * */
                             ContactType.MAIL -> {
-                                emailValidator!!.changeInput(text.toString())
-                                if (emailValidator!!.validate().isSuccess){
-                                    binding.registerFirstContactEditText.
-                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
-                                    binding.routeRegisterSecondFragment.setEnable(true)
+                                val mailValidateResult = BaseValidator.validate(EmptyValidator(inp),EmailValidator(inp))
+                                if (mailValidateResult.isSuccess){
+                                    binding.apply {
+                                        registerFirstContactErrorTextView.visibility = View.GONE
+                                        registerFirstContactEditText.
+                                        setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
+                                        routeRegisterSecondFragment.setEnable(true)
+                                    }
                                 }else{
-                                    binding.registerFirstContactEditText.
-                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-                                    binding.routeRegisterSecondFragment.setEnable(false)
+                                    binding.apply {
+                                        registerFirstContactErrorTextView.text = resources.getString(mailValidateResult.message!!)
+                                        registerFirstContactErrorTextView.visibility = View.VISIBLE
+                                        registerFirstContactEditText.
+                                        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                                        routeRegisterSecondFragment.setEnable(false)
+                                    }
                                 }
                             }
                             ContactType.NUM -> {
-                                if (text.isNotEmpty() && PhoneNumberUtils.isGlobalPhoneNumber(text.toString())){
-                                    binding.registerFirstContactEditText.
-                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
-                                    binding.routeRegisterSecondFragment.setEnable(true)
+                                val numberValidateResult = BaseValidator.validate(EmptyValidator(inp),PhoneValidator(inp))
+                                if (numberValidateResult.isSuccess){
+                                    binding.apply {
+                                        registerFirstContactErrorTextView.visibility = View.GONE
+                                        registerFirstContactEditText.
+                                        setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check_circle_outline, 0)
+                                        routeRegisterSecondFragment.setEnable(true)
+                                    }
                                 }else{
-                                    binding.registerFirstContactEditText.
-                                    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-                                    binding.routeRegisterSecondFragment.setEnable(false)
+                                    binding.apply {
+                                        registerFirstContactErrorTextView.text = resources.getString(numberValidateResult.message!!)
+                                        registerFirstContactErrorTextView.visibility = View.VISIBLE
+                                        registerFirstContactErrorTextView.
+                                        setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                                        routeRegisterSecondFragment.setEnable(false)
+                                    }
                                 }
                             }
                         }
                     }
 
+                }
+            }
+        }
+
+        binding.routeRegisterSecondFragment.setOnClickListener {
+            requireActivity().currentFocus?.let {
+                binding.apply {
+                    when(it.id){
+                        registerFirstNameEditText.id -> {
+                            registerFirstContactEditText.requestFocus()
+                        }
+                        registerFirstContactEditText.id -> {
+                            registerFirstDateOfBirth.requestFocus()
+                        }
+                        registerFirstDateOfBirth.id -> {
+                            val contactInput = registerFirstContactEditText.text.toString()
+                            var result = BaseValidator.validate(
+                                EmptyValidator(contactInput),
+                                if (currentContactType == ContactType.MAIL){
+                                    EmailValidator(contactInput)
+                                }else{
+                                    PhoneValidator(contactInput)
+                                }
+                            )
+                           if (result.isSuccess){
+                               // Create User
+                               TODO()
+                           }
+                        }
+                    }
                 }
             }
         }
@@ -197,7 +230,6 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
 
     private fun observer() {
         viewModel.getContactType.observe(viewLifecycleOwner, Observer {
-            if (it == null) viewModel.changeContactType()
             it?.let {
                 currentContactType = it
                 when(it){
@@ -219,6 +251,7 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
     }
 
     override fun onDestroy() {
+        viewModel.clearData()
         fragmentRegisterFirstBinding = null
         super.onDestroy()
     }

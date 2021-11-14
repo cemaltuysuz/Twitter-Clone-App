@@ -15,9 +15,7 @@ import com.cemaltuysuz.twitter.enums.ContactType
 
 class StarterViewModel : ViewModel() {
 
-    private val contactType = MutableLiveData<ContactType>().apply {
-        if (this.value == null) this.value = ContactType.MAIL
-    }
+    private var contactType = MutableLiveData<ContactType>()
     val getContactType : LiveData<ContactType>
     get() = contactType
 
@@ -30,10 +28,14 @@ class StarterViewModel : ViewModel() {
                 }
             }
         }else {
-            contactType.postValue(ContactType.MAIL)
+            contactType.postValue(ContactType.NUM)
         }
     }
 
+
+    fun clearData(){
+        contactType = MutableLiveData<ContactType>()
+    }
 
 
 }
