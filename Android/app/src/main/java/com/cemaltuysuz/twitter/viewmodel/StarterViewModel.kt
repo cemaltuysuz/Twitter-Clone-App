@@ -15,6 +15,13 @@ import com.cemaltuysuz.twitter.enums.ContactType
 
 class StarterViewModel : ViewModel() {
 
+    // First Register step variables
+    private val userName = MutableLiveData<String>()
+    private val userBirthDay = MutableLiveData<String>()
+    private val userContact = MutableLiveData<String>()
+
+
+
     private var contactType = MutableLiveData<ContactType>()
     val getContactType : LiveData<ContactType>
     get() = contactType
@@ -30,6 +37,13 @@ class StarterViewModel : ViewModel() {
         }else {
             contactType.postValue(ContactType.NUM)
         }
+    }
+
+    fun firstDataSet(username:String,userBirthDay:String,userContact:String,contactType: ContactType){
+        this.userName.value = username
+        this.userBirthDay.value = userBirthDay
+        this.userContact.value = userContact
+        this.contactType.value = contactType
     }
 
 

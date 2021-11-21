@@ -30,6 +30,7 @@ import android.telephony.PhoneNumberUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.cemaltuysuz.twitter.utils.setEnable
 import com.cemaltuysuz.twitter.validators.*
 import com.loper7.date_time_picker.DateTimeConfig
@@ -152,6 +153,8 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
         binding.routeRegisterSecondFragment.setOnClickListener {
             requireActivity().currentFocus?.let {
                 binding.apply {
+                    val name = registerFirstNameEditText.text.toString()
+                    val birthDay = registerFirstDateOfBirth.text.toString()
                     when(it.id){
                         registerFirstNameEditText.id -> {
                             registerFirstContactEditText.requestFocus()
@@ -161,8 +164,10 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
                         }
                         registerFirstDateOfBirth.id -> {
                             val contactInput = registerFirstContactEditText.text.toString()
-                            var result = BaseValidator.validate(
+                            val result = BaseValidator.validate(
                                 EmptyValidator(contactInput),
+                                EmptyValidator(name),
+                                EmptyValidator(birthDay),
                                 if (currentContactType == ContactType.MAIL){
                                     EmailValidator(contactInput)
                                 }else{
@@ -170,8 +175,9 @@ class RegisterFirstFragment : Fragment(R.layout.fragment_register_first) {
                                 }
                             )
                            if (result.isSuccess){
-                               // Create User
-                               TODO()
+                               viewModel.firstDataSet(name,birthDay,contactInput,currentContactType)
+                               Navigation.findNavController(it)
+                                   .navigate(RegisterFirstFragmentDirections.actionRegisterFirstFragment2ToRegisterSecondFragment())
                            }
                         }
                     }

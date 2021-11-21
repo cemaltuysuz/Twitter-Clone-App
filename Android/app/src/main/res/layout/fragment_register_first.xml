@@ -128,7 +128,7 @@
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/light_stroke_line"
                     android:padding="10dp"
-                    android:text="@string/register_first_use_email"
+                    android:text="@string/register_first_use_phone"
                     android:textAllCaps="false" />
 
                 <androidx.appcompat.widget.AppCompatButton

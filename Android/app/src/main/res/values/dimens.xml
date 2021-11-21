@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <dimen name="middle_text_size">16sp</dimen>
+    <dimen name="small_text_size">13sp</dimen>
+
     <!-- Splash Activity -->
     <dimen name="splash_icon_width">60dp</dimen>
     <dimen name="splash_icon_height">60dp</dimen>
@@ -20,5 +24,8 @@
 
     <!-- Register -->
     <dimen name="between_register_inputs">20dp</dimen>
+
+    <!-- Register Third Fragment -->
+    <dimen name="register_third_head_margin_top">20dp</dimen>
 
 </resources>

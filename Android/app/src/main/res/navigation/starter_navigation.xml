@@ -28,5 +28,27 @@
         <action
             android:id="@+id/action_registerFirstFragment2_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_registerFirstFragment2_to_registerSecondFragment"
+            app:destination="@id/registerSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerSecondFragment"
+        android:name="com.cemaltuysuz.twitter.ui.fragment.starter.RegisterSecondFragment"
+        tools:layout="@layout/fragment_register_second">
+        <action
+            android:id="@+id/action_registerSecondFragment_to_registerFirstFragment2"
+            app:destination="@id/registerFirstFragment2" />
+        <action
+            android:id="@+id/action_registerSecondFragment_to_registerThirdFragment"
+            app:destination="@id/registerThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerThirdFragment"
+        android:name="com.cemaltuysuz.twitter.ui.fragment.starter.RegisterThirdFragment"
+        tools:layout="@layout/fragment_register_third">
+        <action
+            android:id="@+id/action_registerThirdFragment_to_registerSecondFragment"
+            app:destination="@id/registerSecondFragment" />
     </fragment>
 </navigation>

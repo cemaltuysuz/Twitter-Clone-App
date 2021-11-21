@@ -33,5 +33,18 @@
     <string name="register_first_use_email">Use email instead</string>
     <string name="register_first_use_phone">Use phone instead</string>
 
+    <!-- Register Second Fragment -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registerSecondHead">Customize your experience</string>
+    <string name="register_second_content1">Twitter uses this data to personalize your experience. This web browsing history will never be stored with your name, email, or phone number.</string>
+    <string name="register_second_content2">For more details about these settings, visit the Help Center.</string>
+
+    <!-- Register Third Fragment -->
+    <string name="register_third_head">Create your account</string>
+    <string name="register_third_content">By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie User. Others will be able to find you by email or phone number when provided. Privacy Policy.</string>
+    <string name="register_third_sign_up">Sign Up</string>
+
+
+
 
 </resources>
